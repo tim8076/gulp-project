@@ -24,7 +24,9 @@ gulp.task('sass', function (){
   return gulp.src('./source/scss/**/*.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({
+      includePaths: ['./node_modules/bootstrap/scss']
+    }).on('error', sass.logError))
     .pipe($.postcss(plugins))
     .pipe($.if(options.env === 'prod', $.cleanCss({ compatibility: 'ie8' })))
     .pipe($.sourcemaps.write('.'))
@@ -46,6 +48,14 @@ gulp.task('babel', () =>
     .pipe(browserSync.stream())
 );
 
+gulp.task('vendorsJs', function(){
+  return gulp.src([
+    './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
+  ])
+    .pipe($.concat('vendor.js'))
+    .pipe(gulp.dest('./public/js'))
+})
+
 gulp.task('html', function(){
   return gulp.src('./source/*.html')
     .pipe($.plumber())
@@ -53,13 +63,6 @@ gulp.task('html', function(){
     .pipe(gulp.dest('./public/'))
     .pipe(browserSync.stream())
 })
-
-// gulp.task('image', () => {
-//   return gulp.src('./source/images/**/*')
-//     .pipe($.plumber())
-//     .pipe($.if(options.env === 'prod', $.imagemin()))
-//     .pipe(gulp.dest('./public/img/'));
-// });
 
 gulp.task('clean', function(){
   return gulp.src(['./public'], { read: false, allowEmpty: true })
@@ -74,6 +77,7 @@ gulp.task('deploy', function () {
 gulp.task('build',
   gulp.series(
     'clean',
+    'vendorsJs',
     gulp.parallel('sass', 'babel', 'html')
   )
 )
@@ -81,6 +85,7 @@ gulp.task('build',
 gulp.task('default',
   gulp.series(
     'clean',
+    'vendorsJs',
     gulp.parallel('sass', 'babel', 'html'),
     function(done){
       browserSync.init({
