@@ -4,11 +4,6 @@ const sass = require('gulp-sass')(require('sass'));
 const autoprefixer = require('autoprefixer');
 const browserSync = require('browser-sync').create();
 const minimist = require('minimist');
-// const plumber = require('gulp-plumber');
-// const sourcemaps = require('gulp-sourcemaps');
-// const babel = require('gulp-babel');
-// const concat = require('gulp-concat');
-// const postcss = require('gulp-postcss');
 
 const envOption = {
   string: 'env',
@@ -16,12 +11,29 @@ const envOption = {
 }
 const options = minimist(process.argv.slice(2), envOption)
 
-gulp.task('sass', function (){
+const path = {
+  des: './public/',
+  html: {
+    src: ['./source/**/*.html'],
+    ejsSrc: [`./source/**/*.ejs`],
+    des: './public/'
+  },
+  scss: {
+    src: './source/scss/**/*.scss',
+    des: './public/css'
+  },
+  js: {
+    src: './source/js/**/*.js',
+    des: './public/js'
+  }
+}
+
+function sassTask(){
   var plugins = [
     autoprefixer(),
   ];
 
-  return gulp.src('./source/scss/**/*.scss')
+  return gulp.src(path.scss.src)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe(sass({
@@ -30,12 +42,12 @@ gulp.task('sass', function (){
     .pipe($.postcss(plugins))
     .pipe($.if(options.env === 'prod', $.cleanCss({ compatibility: 'ie8' })))
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('./public/css'))
+    .pipe(gulp.dest(path.scss.des))
     .pipe(browserSync.stream())
-});
+}
 
-gulp.task('babel', () =>
-  gulp.src('./source/js/**/*.js')
+function babel(){
+  return gulp.src(path.js.src)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.babel({
@@ -44,59 +56,57 @@ gulp.task('babel', () =>
     .pipe($.concat('all.js'))
     .pipe($.if(options.env === 'prod', $.uglify()))
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('./public/js'))
+    .pipe(gulp.dest(path.js.des))
     .pipe(browserSync.stream())
-);
+}
 
-gulp.task('vendorsJs', function(){
+function vendorsJs(){
   return gulp.src([
     './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
   ])
     .pipe($.concat('vendor.js'))
-    .pipe(gulp.dest('./public/js'))
-})
-
-gulp.task('html', function(){
-  return gulp.src('./source/*.html')
+    .pipe(gulp.dest(path.js.des))
+}
+function ejs() {
+  return gulp.src(path.html.src)
     .pipe($.plumber())
+    .pipe($.frontMatter())
+    .pipe(
+      $.layout((file) => {
+        return file.frontMatter;
+      })
+    )
     .pipe($.if(options.env === 'prod', $.htmlmin({ collapseWhitespace: true })))
-    .pipe(gulp.dest('./public/'))
+    .pipe(gulp.dest('./public'))
     .pipe(browserSync.stream())
-})
+}
 
-gulp.task('clean', function(){
+function watch(){
+  gulp.watch(path.scss.src, gulp.series(sassTask))
+  gulp.watch(path.js.src, gulp.series(babel))
+  gulp.watch(path.html.src, gulp.series(ejs))
+  gulp.watch(path.html.ejsSrc, gulp.series(ejs))
+}
+
+function browser(){
+  browserSync.init({
+    server: { baseDir: "./public" },
+    reloadDebounce: 2000
+  });
+}
+
+function clean(){
   return gulp.src(['./public'], { read: false, allowEmpty: true })
     .pipe($.clean());
-})
+}
 
-gulp.task('deploy', function () {
+function deploy(){
   return gulp.src('./public/**/*')
     .pipe($.ghPages());
-});
+}
 
-gulp.task('build',
-  gulp.series(
-    'clean',
-    'vendorsJs',
-    gulp.parallel('sass', 'babel', 'html')
-  )
-)
+exports.deploy = deploy
 
-gulp.task('default',
-  gulp.series(
-    'clean',
-    'vendorsJs',
-    gulp.parallel('sass', 'babel', 'html'),
-    function(done){
-      browserSync.init({
-        server: {
-          baseDir: "./public"
-        }
-      });
-      gulp.watch('./source/scss/**/*.scss', gulp.series('sass'));
-      gulp.watch('./source/js/**/*.js', gulp.series('babel'));
-      gulp.watch('./source/*.html', gulp.series('html'));
-      done();
-    }
-  )
-)
+exports.build = gulp.series(clean, ejs, sassTask, babel, vendorsJs)
+
+exports.default = gulp.series(clean, ejs, sassTask, babel, vendorsJs, gulp.parallel(watch, browser))
