@@ -1,0 +1,281 @@
+//colors
+$color-primary: #326dee !default;
+$color-secondary: #1ac886 !default;
+$color-danger: #d32752 !default;
+$color-gray: #c2c2c2;
+$color-light: #fff !default;
+$color-dark: #000 !default;
+
+$theme-colors: (
+  'primary':   $color-primary,
+  'secondary': $color-secondary,
+  'danger':    $color-danger,
+  'light':     $color-light,
+  'dark':      $color-dark,
+);
+
+//opacity
+$opacity-list: (
+  0:   0,
+  25: .25,
+  50: .5,
+  75: .75,
+  100: 1,
+);
+
+//font-size
+$fs-base: 1rem;           //16px
+$fs-1:  $fs-base * 4;     //64px
+$fs-2:  $fs-base * 3;     //48px
+$fs-3:  $fs-base * 2.25;  //36px
+$fs-4:  $fs-base * 2;     //32px
+$fs-5:  $fs-base * 1.75;  //28px
+$fs-6:  $fs-base * 1.5;   //24px
+$fs-7:  $fs-base * 1.25;  //20px
+$fs-8:  $fs-base;         //16px
+$fs-9:  $fs-base * 0.875; //14px
+
+$font-sizes: (
+   1: $fs-1, 
+   2: $fs-2, 
+   3: $fs-3, 
+   4: $fs-4, 
+   5: $fs-5, 
+   6: $fs-6, 
+   7: $fs-7, 
+   8: $fs-8, 
+   9: $fs-9
+);
+
+// font-family
+$font-family-sans-serif:  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+
+//font-weight
+$font-weight-lighter:  lighter !default;
+$font-weight-light:    300 !default;
+$font-weight-normal:   400 !default;
+$font-weight-bold:     700 !default;
+$font-weight-bolder:   bolder !default;
+
+$font-weights: (
+  lighter: $font-weight-lighter,
+  light:   $font-weight-light,
+  normal:  $font-weight-normal,
+  bold:    $font-weight-bold,
+  bolder:   $font-weight-bolder,
+);
+
+//font-style
+$font-styles: (
+  italic: italic,
+  normal: normal,
+);
+
+//light-height
+$lh-sm: 1.25;
+$lh-base: 1.5;
+$lh-lg: 2;
+
+$line-heights: (
+  1: 1,
+  sm: $lh-sm, 
+  base: $lh-base,
+  lg: $lh-lg,
+);
+
+//text-align
+$text-alignments: (
+  start: left,
+  end: right,
+  center: center,
+);
+
+//text-align
+$text-decoration: (
+  none: none,
+  underline: underline,
+  line-through: line-through,
+);
+
+//border
+$border-width: 1px;
+$border-color: $color-gray;
+$border-values: (
+  null : $border-width solid $border-color,
+  0: 0,
+);
+$border-widths: (
+  0: 0px,
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px
+);
+
+// border-radius
+$border-radius-base:  .25rem;
+$border-radius-sm:    .2rem;
+$border-radius-lg:    .3rem;
+$border-radius-pill:  50rem;
+$border-radius-list: (
+   0: 0,
+   1: $border-radius-sm,
+   2: $border-radius-base,
+   3: $border-radius-lg,
+   'circle': 50%,
+   'pill': $border-radius-pill
+);
+
+//shadow
+$box-shadow:       0 .5rem 1rem rgba($color-dark, .15);
+$box-shadow-sm:    0 .125rem .25rem rgba($color-dark, .075);
+$box-shadow-lg:    0 1rem 3rem rgba($color-dark, .175);
+$shadow-list: (
+  null: $box-shadow,
+  sm: $box-shadow-sm,
+  lg: $box-shadow-lg,
+  none: none,
+);
+
+//overflow
+$overflow-list: ( 
+  auto: auto,
+  hidden: hidden,
+  visible: visible,
+  scroll: scroll 
+);
+
+$spacer: 1rem; //16px
+$spacers: (
+  auto: auto,
+  0: 0,
+  1: $spacer * .25,   //4px
+  2: $spacer * .5,    //8px
+  3: $spacer * .625,  //10px
+  4: $spacer * .75,   //12px
+  5: $spacer,         //16px
+  6: $spacer * 1.25,  //20px
+  7: $spacer * 1.5,   //24px
+  8: $spacer * 1.75,  //28px
+  9: $spacer * 1.875, //30px
+  10: $spacer * 2,    //32px
+  11: $spacer * 2.25, //36px
+  12: $spacer * 2.5,  //40px
+  13: $spacer * 3,    //48px
+  14: $spacer * 3.5,  //56px
+  15: $spacer * 4,    //64px
+);
+
+//display
+$display-list: ( 
+  flex: flex,
+  inline-flex: inline-flex,
+  block: block,
+  inline: inline,
+  table: table,
+  none: none,
+);
+
+//flex 設定
+$flex-directions: (
+  row: row, 
+  row-reverse: row-reverse,
+  column: column,
+  column-reverse: column-reverse,
+);
+$flex-grow-shrink: (
+  0: 0,
+  1: 1,
+);
+$flex-wrap: (
+  wrap: wrap,
+  nowrap: nowrap,
+  wrap-reverse: wrap-reverse,
+);
+$justify-content: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around,
+  evenly: space-evenly,
+);
+$align-items: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  baseline: baseline,
+  stretch: stretch,
+);
+$align-content: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around,
+  stretch: stretch,
+);
+$align-self: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around,
+  stretch: stretch,
+);
+$order: (
+  first: -1,
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  last: 6,
+);
+
+//position
+$position-list: (
+  static: static,
+  relative: relative,
+  absolute: absolute,
+  fixed: fixed,
+  sticky: sticky,
+);
+
+$position-values: (
+  0: 0,
+  50: 50%,
+  100: 100%
+);
+
+$translate-values: (
+  null: translate(-50%, -50%),
+  x: translateX(-50%),
+  y: translateY(-50%), 
+);
+
+//sizing
+$base-padding: 0.75rem !default;
+
+$sizing-list: (
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%,
+  auto: auto
+);
+
+//grid
+$gutter-width: 30px;
+$grid-sum: 12;
+
+$grid-breakpoints: (
+  '': false,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);

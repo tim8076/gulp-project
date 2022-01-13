@@ -1,0 +1,27 @@
+
+// 確認 utils 是否有 key值
+
+@mixin checkUtilKey($breakpoint, $key, $value, $prefix, $property) {
+  @if ($breakpoint == false) {
+    @if ($key == null) {
+      .#{$prefix}{
+        #{$property} : $value;
+      }
+    } @else {
+      .#{$prefix}-#{$key}{
+        #{$property} : $value;
+      }
+    }
+  } @else {
+    @if ($key == null) {
+      .#{$prefix}-#{$breakpoint}{
+        #{$property} : $value;
+      }
+    } @else {
+      .#{$prefix}-#{$breakpoint}-#{$key}{
+        #{$property} : $value;
+      }
+    }
+  }
+  
+}
