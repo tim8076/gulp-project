@@ -36,9 +36,7 @@ function sassTask(){
   return gulp.src(path.scss.src)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe(sass({
-      includePaths: ['./node_modules/bootstrap/scss']
-    }).on('error', sass.logError))
+    .pipe(sass().on('error', sass.logError))
     .pipe($.postcss(plugins))
     .pipe($.if(options.env === 'prod', $.cleanCss({ compatibility: 'ie8' })))
     .pipe($.sourcemaps.write('.'))

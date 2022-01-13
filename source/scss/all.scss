@@ -1,13 +1,17 @@
-@import 'bootstrap';
+// variables
+@import './abstract/variables';
+@import './abstract/media-query';
+@import './abstract/functions';
 
-h1{
-  font-size: 3rem;
-  color: green;
-}
-.box{
-  transform: translateY(-50px);
-  filter: opacity(12);
-  display: grid;
-  justify-items: center;
-  transform: skewY(50%);
-}
+// base classes
+@import './base/reset';
+@import './base/base';
+
+// utils
+@import './utils/utils';
+
+//layout
+@import './layout/grid';
+
+//components
+@import './components/button';

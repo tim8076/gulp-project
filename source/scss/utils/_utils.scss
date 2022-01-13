@@ -1,0 +1,266 @@
+
+$utilities: (
+  'color': (
+    'prefix': 'text',
+    'values': $theme-colors,
+  ),
+  'background-color': (
+    'prefix': 'bg',
+    'values': $theme-colors,
+  ),
+  'font-size': (
+    'prefix': 'fs',
+    'responsive': true,
+    'values': $font-sizes,
+  ),
+  'font-weight': (
+    'prefix': 'fw',
+    'values': $font-weights,
+  ),
+  'text-decoration': (
+    'prefix': 'text-decoration',
+    'values': $text-decoration,
+  ),
+  'text-align': (
+    'prefix': 'text',
+    'responsive': true,
+    'values': $text-alignments,
+  ),
+  'font-style': (
+    'prefix': 'fst',
+    'values': $font-styles,
+  ),
+  'line-height': (
+    'prefix': 'lh',
+    'values': $line-heights,
+  ),
+  'padding': (
+    'prefix': 'p',
+    'responsive': true,
+    'values': $spacers,
+  ),
+  'padding-left': (
+    'prefix': 'pl',
+    'responsive': true,
+    'values': $spacers,
+  ),
+  "padding-right": (
+    "prefix": "pr",
+    'responsive': true,
+    "values": $spacers,
+  ),
+  "padding-top": (
+    "prefix": "pt",
+    "values": $spacers,
+  ),
+  "padding-bottom": (
+    "prefix": "pb",
+    'responsive': true,
+    "values": $spacers,
+  ),
+  "margin": (
+    "prefix": "m",
+    'responsive': true,
+    "values": $spacers,
+  ),
+  "margin-left": (
+    "prefix": "ml",
+    'responsive': true,
+    "values": $spacers,
+  ),
+  "margin-right": (
+    "prefix": "mr",
+    'responsive': true,
+    "values": $spacers,
+  ),
+  "margin-top": (
+    "prefix": "mt",
+    'responsive': true,
+    "values": $spacers,
+  ),
+  "margin-bottom": (
+    "prefix": "mb",
+    'responsive': true,
+    "values": $spacers,
+  ),
+  "opacity": (
+    "prefix": "opacity",
+    'responsive': true,
+    "values": $opacity-list,
+  ),
+  "border": (
+    "prefix": "border",
+    "values": $border-values,
+  ),
+  "border-top": (
+    "prefix": "border-top",
+    "values": $border-values,
+  ),
+  "border-left": (
+    "prefix": "border-left",
+    "values": $border-values,
+  ),
+  "border-bottom": (
+    "prefix": "border-bottom",
+    "values": $border-values,
+  ),
+  "border-right": (
+    "prefix": "border-right",
+    "values": $border-values,
+  ),
+  "border-color": (
+    "prefix": "border",
+    "values": $theme-colors,
+  ),
+  "border-width": (
+    "prefix": "border",
+    "values": $border-widths
+  ),
+  "border-radius": (
+    "prefix": "rounded",
+    'responsive': true,
+    "values": $border-radius-list,
+  ),
+  "box-shadow": (
+    "prefix": "shadow",
+    'responsive': true,
+    "values": $shadow-list,
+  ),
+  "overflow": (
+    "prefix": "overflow",
+    'responsive': true,
+    "values": $overflow-list,
+  ),
+  "display": (
+    "prefix": "d",
+    'responsive': true,
+    "values": $display-list,
+  ),
+  "flex-direction": (
+    "prefix": "flex",
+    'responsive': true,
+    "values": $justify-content,
+  ),
+  "flex-grow": (
+    "prefix": "flex-grow",
+    'responsive': true,
+    "values": $flex-grow-shrink,
+  ),
+  "flex-wrap": (
+    "prefix": "flex",
+    'responsive': true,
+    "values": $flex-wrap,
+  ),
+  "flex-shrink": (
+    "prefix": "flex-shrink",
+    'responsive': true,
+    "values": $flex-grow-shrink,
+  ),
+  "justify-content": (
+    "prefix": "justify-content",
+    'responsive': true,
+    "values": $flex-directions,
+  ),
+  "align-items": (
+    "prefix": "align-items",
+    'responsive': true,
+    "values": $align-items,
+  ),
+  "align-self": (
+    "prefix": "align-self",
+    'responsive': true,
+    "values": $align-self,
+  ),
+  "order": (
+    "prefix": "order",
+    'responsive': true,
+    "values": $order,
+  ),
+  "position": (
+    "prefix": "position",
+    'responsive': true,
+    "values": $position-list,
+  ),
+  "top": (
+    "prefix": "top",
+    'responsive': true,
+    "values": $position-values,
+  ),
+  "left": (
+    "prefix": "start",
+    'responsive': true,
+    "values": $position-values,
+  ),
+  "right": (
+    "prefix": "end",
+    'responsive': true,
+    "values": $position-values,
+  ),
+  "bottom": (
+    "prefix": "bottom",
+    'responsive': true,
+    "values": $position-values,
+  ),
+  "transform": (
+    "prefix": "translate-middle",
+    'responsive': true,
+    "values": $translate-values,
+  ),
+  "width": (
+    "prefix": "w",
+    'responsive': true,
+    "values": $sizing-list,
+  ),
+  "height": (
+    "prefix": "h",
+    'responsive': true,
+    "values": $sizing-list,
+  ),
+  "max-width": (
+    "prefix": "max-width",
+    'responsive': true,
+    "values": (100: 100%),
+  ),
+  "max-height": (
+    "prefix": "max-height",
+    'responsive': true,
+    "values": (100: 100%),
+  ),
+  "viewport-height": (
+    "prefix": "vh",
+    'responsive': true,
+    "values": (100: 100vh),
+  ),
+  "viewport-width": (
+    "prefix": "vw",
+    'responsive': true,
+    "values": (100: 100vw),
+  ),
+);
+
+// generating utilities
+@each $property, $map in $utilities {
+  $responsive: map-get($map, 'responsive');
+  $prefix: map-get($map, 'prefix');
+  $values: map-get($map, 'values');
+
+  @if ($responsive == true) {
+    @each $breakpoint, $pointValue in $grid-breakpoints {
+      @if($pointValue== false) {
+        @each $key, $value in $values {
+          @include checkUtilKey(false, $key, $value, $prefix, $property);
+        }
+      }@else {
+        @include mq($breakpoint) {
+          @each $key, $value in $values {
+            @include checkUtilKey($breakpoint, $key, $value, $prefix, $property);
+          }
+        }
+      }
+    }
+  } @else {
+    @each $key, $value in $values {
+      @include checkUtilKey(false, $key, $value, $prefix, $property);
+    }
+  }
+}
