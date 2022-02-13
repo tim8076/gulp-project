@@ -4,57 +4,95 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
   <link rel="stylesheet" href="css/all.css">
+  <script src="https://kit.fontawesome.com/deb36b59a2.js" crossorigin="anonymous"></script>
+  <title>首頁</title>
 </head>
 <body>
-
-  <h1>123456</h1>
-  <h2>456</h2>
-  <h3>899</h3>
-  <div class="btn btn-primary">123</div>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+<div class="wrapper">
+  <div class="game-area" data-game-start>
+    <div class="game-grid-container">
+      <div class="col text-light">TIC</div>
+      <div class="col text-primary">
+        <i class="fa-regular fa-circle"></i>
+      </div>
+      <div class="col text-light">
+        <i class="fa-solid fa-x"></i>
+      </div>
+      <div class="col text-primary">
+        <i class="fa-solid fa-x"></i>
+      </div>
+      <div class="col text-light">TAC</div>
+      <div class="col text-primary">
+        <i class="fa-regular fa-circle-dot"></i>
+      </div>
+      <div class="col text-primary">
+        <i class="fa-regular fa-circle-dot"></i>
+      </div>
+      <div class="col text-primary">
+        <i class="fa-solid fa-x"></i>
+      </div>
+      <div class="col text-light">TOE</div>
+    </div>
+    <button type="button"
+            class="btn btn-light fw-bold text-primary"
+            data-game-start-button>
+      START
+    </button>
+  </div>
+  <div class="game-area d-none o-turn" data-gaming>
+    <div class="score-board-container">
+      <div class="score-board">
+        <div class="symbol symbol-x bg-dark text-light">
+          <i class="fa-solid fa-x"></i>
+        </div>
+        <div class="score" data-x-score>0</div>
+        <div class="vs">vs</div>
+        <div class="score" data-o-score>0</div>
+        <div class="symbol symbol-o bg-dark text-light">
+          <i class="fa-regular fa-circle"></i>
+        </div>
+      </div>
+      <div class="score-text">
+        <p>YOUR TURN!</p>
       </div>
     </div>
-  </nav>
+    <div data-game-main-area>
+      <div class="game-grid-container gaming">
+        <div class="col" data-num="1"></div>
+        <div class="col" data-num="2"></div>
+        <div class="col" data-num="3"></div>
+        <div class="col" data-num="4"></div>
+        <div class="col" data-num="5"></div>
+        <div class="col" data-num="6"></div>
+        <div class="col" data-num="7"></div>
+        <div class="col" data-num="8"></div>
+        <div class="col" data-num="9"></div>
+      </div>
+      <div class="result x-win d-none" data-result-win>
+        <p class="result-text">WINNER!</p>
+      </div>
+      <div class="result o-win d-none" data-result-win>
+        <p class="result-text">WINNER!</p>
+      </div>
+      <div class="result draw d-none" data-result-win>
+        <p class="result-text">DRAW!</p>
+        <p class="result-text">DRAW!</p>
+        <p class="result-text">DRAW!</p>
+      </div>
+    </div>
+    <button type="button"
+            class="restart-button btn btn-primary-dark fw-bold text-light"
+            data-restart-game-button>
+      RESTART
+    </button>
+  </div>
+</div>
+
+
+
 
 <script src="js/vendor.js"></script>
-<script src="js/all.js"></script>
+<script src="js/all.js" type="module"></script>
 </body>
 </html>
